@@ -139,7 +139,7 @@ class MultilevelCacheSystem {
             String value = cache.get(key);
             if (value != null) {
                 if (i > 0) {
-                    // Copy the value to the higher-level cache (L1)
+                    
                     cacheLevels.get(0).put(key, value);
                 }
                 return value;
@@ -171,15 +171,15 @@ class MultilevelCacheSystem {
 public class Main {
     public static void main(String[] args) {
         MultilevelCacheSystem cacheSystem = new MultilevelCacheSystem();
-        cacheSystem.addCacheLevel(3, "LRU");  // Add L1 with LRU policy
-        cacheSystem.addCacheLevel(2, "LFU");  // Add L2 with LFU policy
+        cacheSystem.addCacheLevel(3, "LRU");
+        cacheSystem.addCacheLevel(2, "LFU");
 
         cacheSystem.put("A", "1");
         cacheSystem.put("B", "2");
         cacheSystem.put("C", "3");
-        cacheSystem.get("A");                 // Access A, it should stay in L1
-        cacheSystem.put("D", "4");            // L1 full, evicts least recently used
-        cacheSystem.get("C");                 // Fetch C from L2 and copy to L1
+        cacheSystem.get("A");
+        cacheSystem.put("D", "4");
+        cacheSystem.get("C");
 
         cacheSystem.printCache();
     }
